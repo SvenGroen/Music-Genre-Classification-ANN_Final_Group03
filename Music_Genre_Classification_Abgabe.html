@@ -13709,11 +13709,11 @@ After running the following code cells you will be able to see two versions of a
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The first version is the one that the authors [4] use, whereas the second one is the one that ----.
-Compared to each other, you might notice that they look quite similar, even though their colour schemes are very different from each one another and the first spectrogram has an axis compared to the second.
+<p>The first version is the one that the authors [4] use, whereas the second one is another version of a Mel-Spectrogram that could potentially be used for classification.</p>
+<p>Compared to each other, you might notice that they look quite similar, even though their colour schemes are very different from each one another and the first spectrogram has an axis compared to the second.
 However, the frequency pattern in the second spectrogram pictures the same frequency distribution, but is depicted upside down.
 Still, training and testing with this reversed mapping should not be a feature that could alter the CNN's performance in comparison with using only the first (not inversed) spectrogram.
-Though thre other different features, namely colour scheme, axis and scale, could, as they add or reduce information in each sample.</p>
+Although, three other different features, namely colour scheme, axis and scale, could have an influence, as they add or reduce information in each sample.</p>
 <p>Eventually, we decided to use the first version of spectrograms as input for our model.
 The reason is that, even if using the second version might improve our results, we want our results to be comparable to the authors', thus the input to our model must be the same.</p>
 
@@ -13792,8 +13792,8 @@ However, we notice that using all layers and especially all dropout-layers, trai
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Concerning the hyperparameters, we use a batchsize of 32, an adam optimizer and a categorical cross-entropy loss.
-We train for 50 epochs in total, which takes approximately --- hours.</p>
+<p>Concerning the hyperparameters, we use a batchsize of 32, an adam optimizer and a categorical cross-entropy loss. We train for 30 epochs in total, which takes approximately 5 hours.
+Additionally, we chose to use a relatively small learning rate of 0.0005 to guarantee convergence.</p>
 
 </div>
 </div>
@@ -13808,8 +13808,8 @@ We train for 50 epochs in total, which takes approximately --- hours.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>During training we observed similar overfitting behaiviour like the others. Adding L2 Regularization helped decreasing overfitting at the start of the training progress, while the whole training progress takes longer.</p>
-<p>Adding dropout-layers like Huang, Serafini and Pugh (2018) resulted in no learning (validation accuaracy of ~10%) even after 70 epochs.</p>
+<p>During training we observed similar overfitting behaviour like the others. Adding L2 Regularization helped decreasing overfitting at the start of the training progress, while the whole training progress takes longer.</p>
+<p>Adding dropout-layers like Huang, Serafini and Pugh (2018) resulted in no learning (validation accuracy of ~10%) even after 70 epochs. This overfitting does also indicates that the data might be fitted better with a simpler model.</p>
 <p>In terms of overfitting the Huang et al. report that:</p>
 <blockquote><p>"(...) all four of our models struggle with over-fitting. We spent the most time trying to mitigate this issue on the CNN. To do so, we introduced three methods. We played around with a combination of batch normalization, dropout layers, and L2 regularization. We found some difficulty in using this, as allowing the model to over-fit actually increased our accuracy. While we could bring the training accuracy and the test accuracy to within .05 of each other, this would result in poor model performance. Thus we accepted our over-fitting issue."</p>
 </blockquote>
@@ -13850,8 +13850,7 @@ We train for 50 epochs in total, which takes approximately --- hours.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One can see how overfitting seems to increase after approximately 12 Epochs. We tried handling this issues with no succes.
-Our Validation accuracy peaks at the last 2 episodes at around 57% with is much lower than Huang et al.'s with 82% (see table 1). Nevertheless, with further investigation regarding overfitting we are confinced that we could have increased the accuracy even more. Unfortunately, we have been limited by limited computing resources which made hyperparameter testing and handling overfitting.</p>
+<p>One can see how overfitting seems to increase after approximately 12 epochs. We tried handling this issue with no success. Our validation accuracy peaks at the last 2 episodes at around 57% which is much lower than Huang et al.'s with 82% (see table 1). Nevertheless, with further investigation regarding overfitting we are convinced that we could have increased the accuracy even more. Unfortunately, we have been limited by finite computing resources which made proper hyperparameter testing and handling overfitting nearly impossible for us.</p>
 
 </div>
 </div>
@@ -13866,12 +13865,7 @@ Our Validation accuracy peaks at the last 2 episodes at around 57% with is much 
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Compared to the results of Huang et al. [4], we observe similar learning patterns.
-Our model tends to misclassify similar genres e.g. classifies jazz as classical and rock as country (see figure 4). Huang et al. made very similar observations (figure 2).
-However, in contrast to our results, they have a much higher accuracy, probably as they had the resources to train for 300 epochs, whereas we could only train for 30 epochs.
-They achieved about 95% accuracy in their trainingset and 82% accuracy in their testset (see table 1), whereas we only achieved an accuracy of --% in the traingsset and --% in the testset.
-Unfortunately, we do not have any information about the train/test-split size from [4], which limits the comparibility of our results with the results of [4].
-Nevertheless, as our training accuracy is relatively low compared to [4], we expect that with  further training, we can potentially improve our test accuracy.</p>
+<p>Compared to the results of Huang et al. [4], we observe slightly similar learning pattern. Our model tends to misclassify similar genres e.g. classifies jazz as classical and rock as country (see figure 5). Huang et al. made similar observations (figure 4), though they could not observe as many misclassifications as we can with our model (e.g. classifying blues as jazz). However, they have a much higher accuracy than we have, probably as they had the resources to train for 300 epochs, whereas we could only train for 30 epochs. They achieved about 95% accuracy in their trainingset and 82% accuracy in their testset (see table 1), whereas we only achieved an accuracy of 97% in the traingsset and 57% in the testset. Unfortunately, we do not have any information about the train/test-split size from [4], which limits the comparability of our results with the results of [4]. Nevertheless, as our training accuracy is relatively low compared to [4], we expect that with further training, we can potentially improve our test accuracy.</p>
 
 </div>
 </div>
