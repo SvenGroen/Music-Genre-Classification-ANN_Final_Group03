@@ -1,4 +1,4 @@
-# ANN_Final_03
+# ANN_Final_03 Music Genre Classification
 Repository for ANN Final Project (Group 03)
 by sgroen and ldoppertin
 
